@@ -55,123 +55,159 @@ static NSMutableSet* activeWrappers = nil;
  *  - If there is no error but the metadata object is nil, that means that the metadata was unchanged.
  *  - Otherwise a metadata object should be returned.
  */
-+ (void)loadMetadata:(NSString*)path completionBlock:(LoadMetadataCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient loadMetadata:path];
++ (DropBlocks *)loadMetadata:(NSString*)path completionBlock:(LoadMetadataCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient loadMetadata:path];
+	return dropblocks;
 }
 
-+ (void)loadMetadata:(NSString*)path withHash:(NSString*)hash completionBlock:(LoadMetadataCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient loadMetadata:path withHash:hash];
++ (DropBlocks *)loadMetadata:(NSString*)path withHash:(NSString*)hash completionBlock:(LoadMetadataCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient loadMetadata:path withHash:hash];
+	return dropblocks;
 }
 
-+ (void)loadMetadata:(NSString*)path atRev:(NSString *)rev completionBlock:(LoadMetadataCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient loadMetadata:path atRev:rev];
++ (DropBlocks *)loadMetadata:(NSString*)path atRev:(NSString *)rev completionBlock:(LoadMetadataCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient loadMetadata:path atRev:rev];
+	return dropblocks;
 }
 
-+ (void)loadDelta:(NSString *)cursor completionBlock:(LoadDeltaCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient loadDelta:cursor];
++ (DropBlocks *)loadDelta:(NSString *)cursor completionBlock:(LoadDeltaCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient loadDelta:cursor];
+	return dropblocks;
 }
 
-+ (void)loadFile:(NSString *)path intoPath:(NSString *)destinationPath completionBlock:(LoadFileCallback)completionBlock progressBlock:(LoadFileProgressCallback)progressBlock {
++ (DropBlocks *)loadFile:(NSString *)path intoPath:(NSString *)destinationPath completionBlock:(LoadFileCallback)completionBlock progressBlock:(LoadFileProgressCallback)progressBlock {
 	DropBlocks* db = [DropBlocks newInstanceWithCallback:completionBlock];
 	db.secondaryCallback = progressBlock;
 	[db.restClient loadFile:path intoPath:destinationPath];
+    return db;
 }
 
-+ (void)loadFile:(NSString *)path atRev:(NSString *)rev intoPath:(NSString *)destinationPath completionBlock:(LoadFileCallback)completionBlock progressBlock:(LoadFileProgressCallback)progressBlock {
++ (DropBlocks *)loadFile:(NSString *)path atRev:(NSString *)rev intoPath:(NSString *)destinationPath completionBlock:(LoadFileCallback)completionBlock progressBlock:(LoadFileProgressCallback)progressBlock {
 	DropBlocks* db = [DropBlocks newInstanceWithCallback:completionBlock];
 	db.secondaryCallback = progressBlock;
 	[db.restClient loadFile:path atRev:rev intoPath:destinationPath];
+    return db;
 }
 
 
-//- (void)cancelFileLoad:(NSString*)path;
-
-
-+ (void)loadThumbnail:(NSString *)path ofSize:(NSString *)size intoPath:(NSString *)destinationPath completionBlock:(LoadThumbnailCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient loadThumbnail:path ofSize:size intoPath:destinationPath];
++ (DropBlocks *)loadThumbnail:(NSString *)path ofSize:(NSString *)size intoPath:(NSString *)destinationPath completionBlock:(LoadThumbnailCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient loadThumbnail:path ofSize:size intoPath:destinationPath];
+	return dropblocks;
 }
 
 
-//- (void)cancelThumbnailLoad:(NSString*)path size:(NSString*)size;
-
-
-+ (void)uploadFile:(NSString *)filename toPath:(NSString *)path withParentRev:(NSString *)parentRev fromPath:(NSString *)sourcePath completionBlock:(UploadFileCallback)completionBlock progressBlock:(UploadFileProgressCallback)progressBlock {
++ (DropBlocks *)uploadFile:(NSString *)filename toPath:(NSString *)path withParentRev:(NSString *)parentRev fromPath:(NSString *)sourcePath completionBlock:(UploadFileCallback)completionBlock progressBlock:(UploadFileProgressCallback)progressBlock {
 	DropBlocks* db = [DropBlocks newInstanceWithCallback:completionBlock];
 	db.secondaryCallback = progressBlock;
 	[db.restClient uploadFile:filename toPath:path withParentRev:parentRev fromPath:sourcePath];
+    return db;
 }
 
-
-//- (void)cancelFileUpload:(NSString *)path;
-//
-///* Avoid using this because it is very easy to overwrite conflicting changes. Provided for backwards
-// compatibility reasons only */
-//- (void)uploadFile:(NSString*)filename toPath:(NSString*)path fromPath:(NSString *)sourcePath __attribute__((deprecated));
-
-
-+ (void)uploadFileChunk:(NSString *)uploadId offset:(unsigned long long)offset fromPath:(NSString *)localPath completionBlock:(UploadFileChunkCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient uploadFileChunk:uploadId offset:offset fromPath:localPath];
++ (DropBlocks *)uploadFileChunk:(NSString *)uploadId offset:(unsigned long long)offset fromPath:(NSString *)localPath completionBlock:(UploadFileChunkCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient uploadFileChunk:uploadId offset:offset fromPath:localPath];
+	return dropblocks;
 }
 
-+ (void)uploadFile:(NSString *)filename toPath:(NSString *)parentFolder withParentRev:(NSString *)parentRev fromUploadId:(NSString *)uploadId completionBlock:(UploadFileCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient uploadFile:filename toPath:parentFolder withParentRev:parentRev fromUploadId:uploadId];
++ (DropBlocks *)uploadFile:(NSString *)filename toPath:(NSString *)parentFolder withParentRev:(NSString *)parentRev fromUploadId:(NSString *)uploadId completionBlock:(UploadFileCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient uploadFile:filename toPath:parentFolder withParentRev:parentRev fromUploadId:uploadId];
+	return dropblocks;
 }
 
-+ (void)loadRevisionsForFile:(NSString *)path completionBlock:(LoadRevisionsCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient loadRevisionsForFile:path];
++ (DropBlocks *)loadRevisionsForFile:(NSString *)path completionBlock:(LoadRevisionsCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient loadRevisionsForFile:path];
+	return dropblocks;
 }
 
-+ (void)loadRevisionsForFile:(NSString *)path limit:(NSInteger)limit completionBlock:(LoadRevisionsCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient loadRevisionsForFile:path limit:limit];
++ (DropBlocks *)loadRevisionsForFile:(NSString *)path limit:(NSInteger)limit completionBlock:(LoadRevisionsCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient loadRevisionsForFile:path limit:limit];
+	return dropblocks;
 }
 
-+ (void)restoreFile:(NSString *)path toRev:(NSString *)rev completionBlock:(RestoreFileCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient restoreFile:path toRev:rev];
++ (DropBlocks *)restoreFile:(NSString *)path toRev:(NSString *)rev completionBlock:(RestoreFileCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient restoreFile:path toRev:rev];
+	return dropblocks;
 }
 
-+ (void)createFolder:(NSString*)path completionBlock:(CreateFolderCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient createFolder:path];
++ (DropBlocks *)createFolder:(NSString*)path completionBlock:(CreateFolderCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient createFolder:path];
+	return dropblocks;
 }
 
-+ (void)deletePath:(NSString*)path completionBlock:(DeletePathCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient deletePath:path];
++ (DropBlocks *)deletePath:(NSString*)path completionBlock:(DeletePathCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient deletePath:path];
+	return dropblocks;
 }
 
-+ (void)copyFrom:(NSString*)fromPath toPath:(NSString *)toPath completionBlock:(CopyPathCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient copyFrom:fromPath toPath:toPath];
++ (DropBlocks *)copyFrom:(NSString*)fromPath toPath:(NSString *)toPath completionBlock:(CopyPathCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient copyFrom:fromPath toPath:toPath];
+	return dropblocks;
 }
 
-+ (void)createCopyRef:(NSString *)path completionBlock:(CreateCopyRefCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient createCopyRef:path];
++ (DropBlocks *)createCopyRef:(NSString *)path completionBlock:(CreateCopyRefCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient createCopyRef:path];
+	return dropblocks;
 }
 
-+ (void)copyFromRef:(NSString*)copyRef toPath:(NSString *)toPath completionBlock:(CopyFromRefCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient copyFromRef:copyRef toPath:toPath];
++ (DropBlocks *)copyFromRef:(NSString*)copyRef toPath:(NSString *)toPath completionBlock:(CopyFromRefCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient copyFromRef:copyRef toPath:toPath];
+	return dropblocks;
 }
 
-+ (void)moveFrom:(NSString*)fromPath toPath:(NSString *)toPath completionBlock:(MovePathCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient moveFrom:fromPath toPath:toPath];
++ (DropBlocks *)moveFrom:(NSString*)fromPath toPath:(NSString *)toPath completionBlock:(MovePathCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient moveFrom:fromPath toPath:toPath];
+	return dropblocks;
 }
 
-+ (void)loadAccountInfo:(LoadAccountInfoCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient loadAccountInfo];
++ (DropBlocks *)loadAccountInfo:(LoadAccountInfoCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient loadAccountInfo];
+	return dropblocks;
 }
 
-+ (void)searchPath:(NSString*)path forKeyword:(NSString*)keyword completionBlock:(SearchPathCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient searchPath:path forKeyword:keyword];
++ (DropBlocks *)searchPath:(NSString*)path forKeyword:(NSString*)keyword completionBlock:(SearchPathCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient searchPath:path forKeyword:keyword];
+	return dropblocks;
 }
 
-+ (void)loadSharableLinkForFile:(NSString *)path shortUrl:(BOOL)createShortUrl completionBlock:(LoadSharableLinkCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient loadSharableLinkForFile:path shortUrl:createShortUrl];
++ (DropBlocks *)loadSharableLinkForFile:(NSString *)path shortUrl:(BOOL)createShortUrl completionBlock:(LoadSharableLinkCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient loadSharableLinkForFile:path shortUrl:createShortUrl];
+	return dropblocks;
 }
 
-+ (void)loadStreamableURLForFile:(NSString *)path completionBlock:(LoadStreamableURLCallback)completionBlock {
-	[[DropBlocks newInstanceWithCallback:completionBlock].restClient loadStreamableURLForFile:path];
++ (DropBlocks *)loadStreamableURLForFile:(NSString *)path completionBlock:(LoadStreamableURLCallback)completionBlock {
+	DropBlocks *dropblocks = [DropBlocks newInstanceWithCallback:completionBlock];
+	[dropblocks.restClient loadStreamableURLForFile:path];
+	return dropblocks;
 }
 
 - (void)cleanup {
 	//this seems to be necessary for some reason, or else DBRestClient blows up because things got dealloced
 	dispatch_async(dispatch_get_main_queue(), ^{
+		[activeWrappers removeObject:self];
+	});
+}
+
+- (void)cancel {
+    [self.restClient cancelAllRequests];
+    dispatch_async(dispatch_get_main_queue(), ^{
 		[activeWrappers removeObject:self];
 	});
 }

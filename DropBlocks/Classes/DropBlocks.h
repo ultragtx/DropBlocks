@@ -35,49 +35,49 @@ typedef void (^LoadSharableLinkCallback)(NSString *link, NSError *error);
 
 + (void)cancelAllRequests;
 
-+ (void)loadMetadata:(NSString*)path completionBlock:(LoadMetadataCallback)completionBlock;
-+ (void)loadMetadata:(NSString*)path withHash:(NSString*)hash completionBlock:(LoadMetadataCallback)completionBlock;
-+ (void)loadMetadata:(NSString*)path atRev:(NSString *)rev completionBlock:(LoadMetadataCallback)completionBlock;
++ (DropBlocks *)loadMetadata:(NSString*)path completionBlock:(LoadMetadataCallback)completionBlock;
++ (DropBlocks *)loadMetadata:(NSString*)path withHash:(NSString*)hash completionBlock:(LoadMetadataCallback)completionBlock;
++ (DropBlocks *)loadMetadata:(NSString*)path atRev:(NSString *)rev completionBlock:(LoadMetadataCallback)completionBlock;
 
-+ (void)loadDelta:(NSString *)cursor completionBlock:(LoadDeltaCallback)completionBlock;
++ (DropBlocks *)loadDelta:(NSString *)cursor completionBlock:(LoadDeltaCallback)completionBlock;
 
-+ (void)loadFile:(NSString *)path intoPath:(NSString *)destinationPath completionBlock:(LoadFileCallback)completionBlock progressBlock:(LoadFileProgressCallback)progressBlock;
-+ (void)loadFile:(NSString *)path atRev:(NSString *)rev intoPath:(NSString *)destinationPath completionBlock:(LoadFileCallback)completionBlock progressBlock:(LoadFileProgressCallback)progressBlock;
++ (DropBlocks *)loadFile:(NSString *)path intoPath:(NSString *)destinationPath completionBlock:(LoadFileCallback)completionBlock progressBlock:(LoadFileProgressCallback)progressBlock;
++ (DropBlocks *)loadFile:(NSString *)path atRev:(NSString *)rev intoPath:(NSString *)destinationPath completionBlock:(LoadFileCallback)completionBlock progressBlock:(LoadFileProgressCallback)progressBlock;
 
-+ (void)loadThumbnail:(NSString *)path ofSize:(NSString *)size intoPath:(NSString *)destinationPath completionBlock:(LoadThumbnailCallback)completionBlock;
++ (DropBlocks *)loadThumbnail:(NSString *)path ofSize:(NSString *)size intoPath:(NSString *)destinationPath completionBlock:(LoadThumbnailCallback)completionBlock;
 
-+ (void)uploadFile:(NSString *)filename toPath:(NSString *)path withParentRev:(NSString *)parentRev fromPath:(NSString *)sourcePath completionBlock:(UploadFileCallback)completionBlock progressBlock:(UploadFileProgressCallback)progressBlock;
++ (DropBlocks *)uploadFile:(NSString *)filename toPath:(NSString *)path withParentRev:(NSString *)parentRev fromPath:(NSString *)sourcePath completionBlock:(UploadFileCallback)completionBlock progressBlock:(UploadFileProgressCallback)progressBlock;
 
-+ (void)uploadFileChunk:(NSString *)uploadId offset:(unsigned long long)offset fromPath:(NSString *)localPath completionBlock:(UploadFileChunkCallback)completionBlock;
++ (DropBlocks *)uploadFileChunk:(NSString *)uploadId offset:(unsigned long long)offset fromPath:(NSString *)localPath completionBlock:(UploadFileChunkCallback)completionBlock;
 
-+ (void)uploadFile:(NSString *)filename toPath:(NSString *)parentFolder withParentRev:(NSString *)parentRev fromUploadId:(NSString *)uploadId completionBlock:(UploadFileCallback)completionBlock;
++ (DropBlocks *)uploadFile:(NSString *)filename toPath:(NSString *)parentFolder withParentRev:(NSString *)parentRev fromUploadId:(NSString *)uploadId completionBlock:(UploadFileCallback)completionBlock;
 
-+ (void)loadRevisionsForFile:(NSString *)path completionBlock:(LoadRevisionsCallback)completionBlock;
++ (DropBlocks *)loadRevisionsForFile:(NSString *)path completionBlock:(LoadRevisionsCallback)completionBlock;
 
-+ (void)loadRevisionsForFile:(NSString *)path limit:(NSInteger)limit completionBlock:(LoadRevisionsCallback)completionBlock;
++ (DropBlocks *)loadRevisionsForFile:(NSString *)path limit:(NSInteger)limit completionBlock:(LoadRevisionsCallback)completionBlock;
 
-+ (void)restoreFile:(NSString *)path toRev:(NSString *)rev completionBlock:(RestoreFileCallback)completionBlock;
++ (DropBlocks *)restoreFile:(NSString *)path toRev:(NSString *)rev completionBlock:(RestoreFileCallback)completionBlock;
 
-+ (void)createFolder:(NSString*)path completionBlock:(CreateFolderCallback)completionBlock;
++ (DropBlocks *)createFolder:(NSString*)path completionBlock:(CreateFolderCallback)completionBlock;
 
-+ (void)deletePath:(NSString*)path completionBlock:(DeletePathCallback)completionBlock;
++ (DropBlocks *)deletePath:(NSString*)path completionBlock:(DeletePathCallback)completionBlock;
 
-+ (void)copyFrom:(NSString*)fromPath toPath:(NSString *)toPath completionBlock:(CopyPathCallback)completionBlock;
++ (DropBlocks *)copyFrom:(NSString*)fromPath toPath:(NSString *)toPath completionBlock:(CopyPathCallback)completionBlock;
 
-+ (void)createCopyRef:(NSString *)path completionBlock:(CreateCopyRefCallback)completionBlock;
++ (DropBlocks *)createCopyRef:(NSString *)path completionBlock:(CreateCopyRefCallback)completionBlock;
 
-+ (void)copyFromRef:(NSString*)copyRef toPath:(NSString *)toPath completionBlock:(CopyFromRefCallback)completionBlock;
++ (DropBlocks *)copyFromRef:(NSString*)copyRef toPath:(NSString *)toPath completionBlock:(CopyFromRefCallback)completionBlock;
 
-+ (void)moveFrom:(NSString*)fromPath toPath:(NSString *)toPath completionBlock:(MovePathCallback)completionBlock;
++ (DropBlocks *)moveFrom:(NSString*)fromPath toPath:(NSString *)toPath completionBlock:(MovePathCallback)completionBlock;
 
-+ (void)loadAccountInfo:(LoadAccountInfoCallback)completionBlock;
++ (DropBlocks *)loadAccountInfo:(LoadAccountInfoCallback)completionBlock;
 
-+ (void)searchPath:(NSString*)path forKeyword:(NSString*)keyword completionBlock:(SearchPathCallback)completionBlock;
++ (DropBlocks *)searchPath:(NSString*)path forKeyword:(NSString*)keyword completionBlock:(SearchPathCallback)completionBlock;
 
-+ (void)loadSharableLinkForFile:(NSString *)path shortUrl:(BOOL)createShortUrl completionBlock:(LoadSharableLinkCallback)completionBlock;
++ (DropBlocks *)loadSharableLinkForFile:(NSString *)path shortUrl:(BOOL)createShortUrl completionBlock:(LoadSharableLinkCallback)completionBlock;
 
-+ (void)loadStreamableURLForFile:(NSString *)path completionBlock:(LoadStreamableURLCallback)completionBlock;
++ (DropBlocks *)loadStreamableURLForFile:(NSString *)path completionBlock:(LoadStreamableURLCallback)completionBlock;
 
-
+- (void)cancel;
 
 @end
